@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -9,6 +9,7 @@ import Projects from './pages/Projects';
 import Experience from './pages/Experience';
 import Research from './pages/Research';
 import Contact from './pages/Contact';
+import ClickSpark from './components/ClickSpark';
 
 export const ThemeContext = createContext();
 
@@ -17,9 +18,7 @@ function App() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
+    if (savedTheme) setTheme(savedTheme);
   }, []);
 
   useEffect(() => {
@@ -43,7 +42,7 @@ function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, themeClasses }}>
-      <Router>
+      <ClickSpark>
         <div className="min-h-screen" style={{ backgroundColor: themeClasses.background }}>
           <Navbar />
           <Routes>
@@ -54,10 +53,11 @@ function App() {
             <Route path="/experience" element={<Experience />} />
             <Route path="/research" element={<Research />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           <Footer />
         </div>
-      </Router>
+      </ClickSpark>
     </ThemeContext.Provider>
   );
 }

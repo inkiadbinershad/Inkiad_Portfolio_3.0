@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { skills } from '../data/skills';
 import SkillBadge from '../components/SkillBadge';
+import CardWithGlare from '../components/CardWithGlare';
 import { ThemeContext } from '../App';
 import useInView from '../hooks/useInView';
 
@@ -19,52 +20,58 @@ const Skills = () => {
         </p>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div ref={cardsRef1} className="skill-card group rounded-xl p-6 transition-all duration-300 ease-out border card-glow relative overflow-hidden" style={{ backgroundColor: themeClasses.cardBackground, borderColor: themeClasses.border, boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
-              <div className="scan-line"></div>
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
-                  <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>⚛️</span>
+            <div ref={cardsRef1} className="skill-card">
+              <CardWithGlare className="group h-full">
+                <div className="scan-line"></div>
+                <div className="flex items-center mb-6">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
+                    <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>⚛️</span>
+                  </div>
+                  <h2 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Technical Skills</h2>
                 </div>
-                <h2 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Technical Skills</h2>
-              </div>
-              <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
-              <div className="flex flex-wrap gap-3">
-                {skills.technical.map((skill, index) => (
-                  <SkillBadge key={index} skill={skill} />
-                ))}
-              </div>
+                <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
+                <div className="flex flex-wrap gap-3">
+                  {skills.technical.map((skill, index) => (
+                    <SkillBadge key={index} skill={skill} />
+                  ))}
+                </div>
+              </CardWithGlare>
             </div>
 
-            <div ref={cardsRef2} className="skill-card group rounded-xl p-6 transition-all duration-300 ease-out border card-glow relative overflow-hidden" style={{ backgroundColor: themeClasses.cardBackground, borderColor: themeClasses.border, boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
-              <div className="scan-line"></div>
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
-                  <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>🛠️</span>
+            <div ref={cardsRef2} className="skill-card">
+              <CardWithGlare className="group h-full">
+                <div className="scan-line"></div>
+                <div className="flex items-center mb-6">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
+                    <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>🛠️</span>
+                  </div>
+                  <h2 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Professional Skills</h2>
                 </div>
-                <h2 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Professional Skills</h2>
-              </div>
-              <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
-              <div className="flex flex-wrap gap-3">
-                {skills.professional.map((skill, index) => (
-                  <SkillBadge key={index} skill={skill} />
-                ))}
-              </div>
+                <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
+                <div className="flex flex-wrap gap-3">
+                  {skills.professional.map((skill, index) => (
+                    <SkillBadge key={index} skill={skill} />
+                  ))}
+                </div>
+              </CardWithGlare>
             </div>
 
-            <div ref={cardsRef3} className="skill-card group rounded-xl p-6 transition-all duration-300 ease-out border card-glow relative overflow-hidden" style={{ backgroundColor: themeClasses.cardBackground, borderColor: themeClasses.border, boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
-              <div className="scan-line"></div>
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
-                  <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>💡</span>
+            <div ref={cardsRef3} className="skill-card">
+              <CardWithGlare className="group h-full">
+                <div className="scan-line"></div>
+                <div className="flex items-center mb-6">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
+                    <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>💡</span>
+                  </div>
+                  <h2 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Creative Skills</h2>
                 </div>
-                <h2 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Creative Skills</h2>
-              </div>
-              <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
-              <div className="flex flex-wrap gap-3">
-                {skills.creative.map((skill, index) => (
-                  <SkillBadge key={index} skill={skill} />
-                ))}
-              </div>
+                <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
+                <div className="flex flex-wrap gap-3">
+                  {skills.creative.map((skill, index) => (
+                    <SkillBadge key={index} skill={skill} />
+                  ))}
+                </div>
+              </CardWithGlare>
             </div>
           </div>
       </div>

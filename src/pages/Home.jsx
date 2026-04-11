@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { ThemeContext } from '../App';
 import { projects } from '../data/projects';
 import { skills } from '../data/skills';
@@ -6,11 +6,11 @@ import { research } from '../data/research';
 import ProjectCard from '../components/ProjectCard';
 import ResearchCard from '../components/ResearchCard';
 import SkillBadge from '../components/SkillBadge';
+import CardWithGlare from '../components/CardWithGlare';
 import useMouseFollow from '../hooks/useMouseFollow';
 import useInView from '../hooks/useInView';
 import SplitTextReveal from '../components/SplitTextReveal';
 import ParticleBackground from '../components/ParticleBackground';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -50,6 +50,7 @@ const Home = () => {
     window.location.href = mailtoLink;
     setFormData({ name: '', email: '', message: '' });
   };
+
   const { transform: transform1, handleMouseMove: handleMouseMove1, handleMouseLeave: handleMouseLeave1 } = useMouseFollow();
   const { transform: transform2, handleMouseMove: handleMouseMove2, handleMouseLeave: handleMouseLeave2 } = useMouseFollow();
   const { transform: transform3, handleMouseMove: handleMouseMove3, handleMouseLeave: handleMouseLeave3 } = useMouseFollow();
@@ -159,7 +160,7 @@ const Home = () => {
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="skill-card group rounded-xl p-6 transition-all duration-300 ease-out card-glow relative overflow-hidden" style={{ backgroundColor: themeClasses.cardBackground, borderColor: themeClasses.border, border: `1px solid ${themeClasses.border}`, boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
+            <CardWithGlare className="skill-card group">
               <div className="scan-line"></div>
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
@@ -173,15 +174,16 @@ const Home = () => {
                   <SkillBadge key={index} skill={skill} />
                 ))}
               </div>
-            </div>
+            </CardWithGlare>
 
-            <div className="skill-card group rounded-xl p-6 transition-all duration-300 ease-out card-glow relative overflow-hidden" style={{ backgroundColor: themeClasses.cardBackground, borderColor: themeClasses.border, border: `1px solid ${themeClasses.border}`, boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
+            <CardWithGlare className="skill-card group">
               <div className="scan-line"></div>
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
                   <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>🛠️</span>
                 </div>
                 <h3 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Professional Skills</h3>
+
               </div>
               <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
               <div className="flex flex-wrap gap-3">
@@ -189,9 +191,9 @@ const Home = () => {
                   <SkillBadge key={index} skill={skill} />
                 ))}
               </div>
-            </div>
+            </CardWithGlare>
 
-            <div className="skill-card group rounded-xl p-6 transition-all duration-300 ease-out card-glow relative overflow-hidden" style={{ backgroundColor: themeClasses.cardBackground, borderColor: themeClasses.border, border: `1px solid ${themeClasses.border}`, boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
+            <CardWithGlare className="skill-card group">
               <div className="scan-line"></div>
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
@@ -205,12 +207,12 @@ const Home = () => {
                   <SkillBadge key={index} skill={skill} />
                 ))}
               </div>
-            </div>
+            </CardWithGlare>
           </div>
           <div className="text-center mt-8">
             <Link
               to="/skills"
-              className="px-6 py-3 rounded-lg font-medium transition-colors duration-200"
+              className="px-6 py-3 rounded-lg font-medium transition-colors duration-200 text-center card-glow"
               style={{ backgroundColor: themeClasses.accent, color: themeClasses.cardBackground }}
               onMouseEnter={(e) => e.target.style.backgroundColor = themeClasses.primaryText}
               onMouseLeave={(e) => e.target.style.backgroundColor = themeClasses.accent}
@@ -290,10 +292,10 @@ const Home = () => {
             My professional journey and career highlights
           </p>
 
-          <div className="flex flex-row gap-8">
+          <div className="flex flex-col lg:flex-row gap-8">
             {experiences.map((exp, index) => (
               <div key={index} className="blur-reveal flex-1">
-                <div className="group rounded-xl p-6 transition-all duration-300 ease-out border card-glow" style={{ backgroundColor: themeClasses.cardBackground, borderColor: themeClasses.border, boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
+                <CardWithGlare className="group">
                   <div className="flex flex-col mb-4">
                     <div className="stagger-item">
                       <h3 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>{exp.title}</h3>
@@ -325,7 +327,7 @@ const Home = () => {
                       </span>
                     ))}
                   </div>
-                </div>
+                </CardWithGlare>
               </div>
             ))}
           </div>
@@ -502,3 +504,4 @@ const Home = () => {
 };
 
 export default Home;
+

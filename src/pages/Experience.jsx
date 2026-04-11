@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import CardWithGlare from '../components/CardWithGlare';
 import { ThemeContext } from '../App';
 import useInView from '../hooks/useInView';
 
@@ -43,7 +44,7 @@ const Experience = () => {
               const refs = [card1Ref, card2Ref];
               return (
                 <div key={index} ref={refs[index]} className={`${index % 2 === 0 ? 'timeline-card-left' : 'timeline-card-right'} md:w-1/2 ${index % 2 === 1 ? 'md:ml-auto' : ''}`}>
-                  <div className="group rounded-xl p-6 transition-all duration-300 ease-out border card-glow" style={{ backgroundColor: themeClasses.cardBackground, borderColor: themeClasses.border, boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
+                  <CardWithGlare className="group">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                       <div className="stagger-item">
                         <h2 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>{exp.title}</h2>
@@ -71,7 +72,7 @@ const Experience = () => {
                         </span>
                       ))}
                     </div>
-                  </div>
+                  </CardWithGlare>
                 </div>
               );
             })}
