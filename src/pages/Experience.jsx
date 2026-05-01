@@ -1,12 +1,39 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import CardWithGlare from '../components/CardWithGlare';
 import { ThemeContext } from '../App';
 import useInView from '../hooks/useInView';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Experience = () => {
   const { themeClasses } = useContext(ThemeContext);
+  const headingRef = useInView();
   const card1Ref = useInView();
   const card2Ref = useInView();
+  const timelineLineRef = useRef(null);
+
+  useEffect(() => {
+    const line = timelineLineRef.current;
+    if (!line) return;
+
+    gsap.fromTo(line,
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: line,
+          start: 'top 80%',
+          end: 'bottom 20%',
+          scrub: 1
+        }
+      }
+    );
+
+    return () => ScrollTrigger.getAll().forEach(st => st.kill());
+  }, []);
 
   const experiences = [
     {
@@ -28,16 +55,27 @@ const Experience = () => {
   ];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: themeClasses.background }}>
+    <div style={{ backgroundColor: themeClasses.background }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <h1 className="text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Experience</h1>
-        <p className="text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
-          My professional journey and career highlights
-        </p>
+        <div ref={headingRef}>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Experience</h1>
+          <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
+            My professional journey and career highlights
+          </p>
+        </div>
 
         <div className="relative">
           {/* Timeline Line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full timeline-line" style={{ background: `linear-gradient(180deg, ${themeClasses.accent}, transparent)`, top: 0 }}></div>
+          <div 
+            ref={timelineLineRef}
+            className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full timeline-line" 
+            style={{ 
+              background: `linear-gradient(180deg, ${themeClasses.accent}, transparent)`, 
+              top: 0,
+              scaleY: 0,
+              transformOrigin: 'top center'
+            }}
+          ></div>
 
           <div className="space-y-8">
             {experiences.map((exp, index) => {
@@ -47,7 +85,7 @@ const Experience = () => {
                   <CardWithGlare className="group">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                       <div className="stagger-item">
-                        <h2 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>{exp.title}</h2>
+                        <h2 className="text-lg sm:text-xl font-semibold" style={{ color: themeClasses.primaryText }}>{exp.title}</h2>
                         <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
                         <p className="font-medium" style={{ color: themeClasses.accent }}>{exp.company}</p>
                       </div>
@@ -59,7 +97,7 @@ const Experience = () => {
                         href="https://www.facebook.com/cameow.bd/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block px-4 py-2 rounded-lg font-medium transition-all duration-400 mb-4"
+                        className="inline-flex items-center min-h-[44px] px-4 py-2 rounded-lg font-medium transition-all duration-400 mb-4"
                         style={{ backgroundColor: themeClasses.accent, color: themeClasses.cardBackground }}
                       >
                         Visit Cameow

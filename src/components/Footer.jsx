@@ -1,4 +1,4 @@
-import logo from './Gemini_Generated_Image_9ksb5a9ksb5a9ksb.png';
+import logo from '../assets/profile.png';
 
 const Footer = () => {
   return (

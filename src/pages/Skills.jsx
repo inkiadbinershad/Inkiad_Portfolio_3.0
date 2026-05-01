@@ -7,19 +7,22 @@ import useInView from '../hooks/useInView';
 
 const Skills = () => {
   const { themeClasses } = useContext(ThemeContext);
+  const headingRef = useInView();
   const cardsRef1 = useInView();
   const cardsRef2 = useInView();
   const cardsRef3 = useInView();
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: themeClasses.background }}>
+    <div style={{ backgroundColor: themeClasses.background }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <h1 className="text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Skills</h1>
-        <p className="text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
-          Technologies and tools I work with
-        </p>
+        <div ref={headingRef}>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Skills</h1>
+          <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
+            Technologies and tools I work with
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div ref={cardsRef1} className="skill-card">
               <CardWithGlare className="group h-full">
                 <div className="scan-line"></div>
@@ -27,7 +30,7 @@ const Skills = () => {
                   <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
                     <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>⚛️</span>
                   </div>
-                  <h2 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Technical Skills</h2>
+                  <h2 className="text-lg sm:text-xl font-semibold" style={{ color: themeClasses.primaryText }}>Technical Skills</h2>
                 </div>
                 <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
                 <div className="flex flex-wrap gap-3">
@@ -45,7 +48,7 @@ const Skills = () => {
                   <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
                     <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>🛠️</span>
                   </div>
-                  <h2 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Professional Skills</h2>
+                  <h2 className="text-lg sm:text-xl font-semibold" style={{ color: themeClasses.primaryText }}>Professional Skills</h2>
                 </div>
                 <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
                 <div className="flex flex-wrap gap-3">
@@ -63,7 +66,7 @@ const Skills = () => {
                   <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
                     <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>💡</span>
                   </div>
-                  <h2 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Creative Skills</h2>
+                  <h2 className="text-lg sm:text-xl font-semibold" style={{ color: themeClasses.primaryText }}>Creative Skills</h2>
                 </div>
                 <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
                 <div className="flex flex-wrap gap-3">

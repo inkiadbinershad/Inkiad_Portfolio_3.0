@@ -57,16 +57,16 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: themeClasses.background }}>
+    <div style={{ backgroundColor: themeClasses.background }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <h1 className="text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Contact</h1>
-        <p className="text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Contact</h1>
+        <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
           Let's work together and build something amazing
         </p>
 
         <div className="grid md:grid-cols-2 gap-12">
           <div ref={contactRef} className="blur-reveal">
-            <h2 className="text-2xl font-semibold mb-6 stagger-item" style={{ color: themeClasses.primaryText }}>Get In Touch</h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-6 stagger-item" style={{ color: themeClasses.primaryText }}>Get In Touch</h2>
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
                 <div key={index} className="flex items-center blur-reveal" style={{ animationDelay: `${0.1 + index * 0.1}s` }}>
@@ -78,7 +78,7 @@ const Contact = () => {
                     <a
                       href={info.link}
                       style={{ color: themeClasses.accent, transition: 'color 0.3s ease' }}
-                      className="transition-colors duration-300"
+                      className="inline-block min-h-[44px] py-2 transition-colors duration-300"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

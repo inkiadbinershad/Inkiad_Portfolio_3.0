@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+#root {
+  background-color: #0f172a;
+}
+
 .card-glow {
   transition: all 0.35s ease;
 }
@@ -507,4 +513,114 @@ html {
 
 .animate-fade-in {
   animation: fade-in 0.6s ease-out forwards;
+}
+
+/* ==================== PAGE LOADER ==================== */
+#pre-load {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0f172a;
+  pointer-events: all;
+  transition: opacity 0.6s ease;
+}
+
+#pre-load.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-inner {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  color: #38bdf8;
+  font-size: 1.5rem;
+  font-family: monospace;
+  z-index: 2;
+}
+
+.loader-inner .box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  animation: ripple-spin 2s linear infinite;
+}
+
+.loader-inner .box:nth-child(2) {
+  width: 20px;
+  height: 20px;
+  border-top-color: rgba(56, 189, 248, 1);
+  animation-duration: 1.2s;
+}
+
+.loader-inner .box:nth-child(3) {
+  width: 35px;
+  height: 35px;
+  border-top-color: rgba(56, 189, 248, 0.8);
+  animation-duration: 1.4s;
+  animation-direction: reverse;
+}
+
+.loader-inner .box:nth-child(4) {
+  width: 50px;
+  height: 50px;
+  border-top-color: rgba(56, 189, 248, 0.6);
+  animation-duration: 1.6s;
+}
+
+.loader-inner .box:nth-child(5) {
+  width: 65px;
+  height: 65px;
+  border-top-color: rgba(56, 189, 248, 0.4);
+  animation-duration: 1.8s;
+  animation-direction: reverse;
+}
+
+.loader-inner .box:nth-child(6) {
+  width: 80px;
+  height: 80px;
+  border-top-color: rgba(56, 189, 248, 0.2);
+  animation-duration: 2s;
+}
+
+@keyframes ripple-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes color-change {
+  0%,
+  100% {
+    border-top-color: rgba(56, 189, 248, 0.8);
+  }
+  50% {
+    border-top-color: rgba(56, 189, 248, 0.4);
+  }
 }

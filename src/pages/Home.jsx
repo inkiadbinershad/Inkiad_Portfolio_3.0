@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import { ThemeContext } from '../App';
 import { projects } from '../data/projects';
 import { skills } from '../data/skills';
@@ -9,9 +9,10 @@ import SkillBadge from '../components/SkillBadge';
 import CardWithGlare from '../components/CardWithGlare';
 import useMouseFollow from '../hooks/useMouseFollow';
 import useInView from '../hooks/useInView';
-import SplitTextReveal from '../components/SplitTextReveal';
+import gsap from 'gsap';
 import ParticleBackground from '../components/ParticleBackground';
 import { Link } from 'react-router-dom';
+import profileImg from '../assets/profile.png';
 
 const Home = () => {
   const { themeClasses } = useContext(ThemeContext);
@@ -21,26 +22,38 @@ const Home = () => {
     message: ''
   });
 
+  // Ref for hero title animation
+  const heroTitleRef = useRef(null);
+
   // Refs for scroll animations
-  const aboutRef = useInView();
+  const aboutRef = useInView()
   const skillsRef = useInView();
   const projectsRef = useInView();
   const researchRef = useInView();
   const experienceRef = useInView();
-  const [logoSrc, setLogoSrc] = useState(null);
 
-  useEffect(() => {
-    import('../components/Gemini_Generated_Image_9ksb5a9ksb5a9ksb.png')
-      .then((m) => setLogoSrc(m.default || m))
-      .catch(() => setLogoSrc(null));
-  }, []);
-
-  const handleChange = (e) => {
+const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
+
+  // Hero title letter animation
+  useEffect(() => {
+    const letters = heroTitleRef.current?.querySelectorAll('.gsap-letter');
+    if (!letters) return;
+    gsap.fromTo(letters,
+      { opacity: 0, y: -60, rotateX: -90 },
+      {
+        opacity: 1, y: 0, rotateX: 0,
+        duration: 0.6,
+        ease: 'back.out(1.7)',
+        stagger: 0.04,
+        delay: 0.2
+      }
+    );
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -84,13 +97,21 @@ const Home = () => {
         <ParticleBackground />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="text-left">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 glow-pulse" style={{ color: themeClasses.primaryText }}>
-              <SplitTextReveal text="INKIAD BIN ERSHAD RAFEY" delay={0} />
+<h1 ref={heroTitleRef} className="text-5xl md:text-6xl font-bold mb-4 glow-pulse" style={{ color: themeClasses.primaryText }}>
+              {"INKIAD BIN ERSHAD RAFEY".split("").map((char, i) => (
+                <span
+                  key={i}
+                  className="gsap-letter inline-block"
+                  style={{ display: char === " " ? "inline" : "inline-block" }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))}
             </h1>
-            <p className="text-xl md:text-2xl mb-6 animate-fade-in" style={{ color: themeClasses.accent, animationDelay: '0.6s' }}>
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 animate-fade-in" style={{ color: themeClasses.accent, animationDelay: '0.6s' }}>
               <span className="gradient-text">Frontend Developer</span> & Creative Professional
             </p>
-            <p className="text-lg mb-8 max-w-2xl blur-reveal" style={{ color: themeClasses.primaryText, animationDelay: '0.8s' }}>
+            <p className="text-sm sm:text-base lg:text-lg mb-8 max-w-2xl blur-reveal" style={{ color: themeClasses.primaryText, animationDelay: '0.8s' }}>
               I'm a responsibility-driven developer with hands-on startup experience, focused on building practical 
               <span className="keyword-glow"> digital solutions </span>
               with integrity and clarity.
@@ -124,25 +145,19 @@ const Home = () => {
       <section id="about" className="py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={aboutRef}>
-          <h2 className="text-4xl font-bold mb-8 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>About Me</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>About Me</h2>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              {logoSrc ? (
-                <img src={logoSrc} alt="Logo" className="w-48 h-48 mx-auto mb-6 rounded-full object-cover shadow-lg blur-reveal card-glow" />
-              ) : (
-                <div className="w-48 h-48 mx-auto mb-6 rounded-full flex items-center justify-center shadow-lg blur-reveal card-glow" style={{ backgroundColor: themeClasses.accent }}>
-                  <span style={{ color: themeClasses.cardBackground, fontSize: '4rem', fontWeight: 'bold' }}>IB</span>
-                </div>
-              )}
+              <img src={profileImg} alt="Profile" className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto mb-6 rounded-full object-cover shadow-lg blur-reveal card-glow" />
             </div>
             <div className="space-y-6">
-              <p className="text-lg leading-relaxed blur-reveal" style={{ color: themeClasses.primaryText }}>
+              <p className="text-sm sm:text-base lg:text-lg leading-relaxed blur-reveal" style={{ color: themeClasses.primaryText }}>
                 I'm a <span className="keyword-glow">Computer Science student</span> from Bangladesh with real-world experience in startup leadership, frontend development, and digital content creation.
               </p>
-              <p className="text-lg leading-relaxed blur-reveal" style={{ color: themeClasses.primaryText, animationDelay: '0.15s' }}>
+              <p className="text-sm sm:text-base lg:text-lg leading-relaxed blur-reveal" style={{ color: themeClasses.primaryText, animationDelay: '0.15s' }}>
                 Over the past year, I worked in a <span className="keyword-glow">fast-moving startup environment</span> where I took on high-responsibility roles, including Frontend Team Lead and later management-level responsibilities. This experience shaped my ability to learn fast, adapt under pressure, and take ownership.
               </p>
-              <p className="text-lg leading-relaxed blur-reveal" style={{ color: themeClasses.primaryText, animationDelay: '0.3s' }}>
+              <p className="text-sm sm:text-base lg:text-lg leading-relaxed blur-reveal" style={{ color: themeClasses.primaryText, animationDelay: '0.3s' }}>
                 I believe in <span className="keyword-glow">skill-first growth</span>, ethical work, and building things that last. I'm currently transitioning into freelancing and remote work.
               </p>
             </div>
@@ -154,19 +169,19 @@ const Home = () => {
       <section id="skills" className="py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={skillsRef}>
-          <h2 className="text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Skills</h2>
-          <p className="text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Skills</h2>
+          <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
             Technologies and tools I work with
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <CardWithGlare className="skill-card group">
               <div className="scan-line"></div>
               <div className="flex items-center mb-6">
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
                   <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>⚛️</span>
                 </div>
-                <h3 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Technical Skills</h3>
+                <h3 className="text-lg sm:text-xl font-semibold" style={{ color: themeClasses.primaryText }}>Technical Skills</h3>
               </div>
               <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
               <div className="flex flex-wrap gap-3">
@@ -182,7 +197,7 @@ const Home = () => {
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
                   <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>🛠️</span>
                 </div>
-                <h3 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Professional Skills</h3>
+                <h3 className="text-lg sm:text-xl font-semibold" style={{ color: themeClasses.primaryText }}>Professional Skills</h3>
 
               </div>
               <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
@@ -199,7 +214,7 @@ const Home = () => {
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
                   <span style={{ color: themeClasses.cardBackground, fontSize: '1.5rem' }}>💡</span>
                 </div>
-                <h3 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>Creative Skills</h3>
+                <h3 className="text-lg sm:text-xl font-semibold" style={{ color: themeClasses.primaryText }}>Creative Skills</h3>
               </div>
               <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
               <div className="flex flex-wrap gap-3">
@@ -227,12 +242,12 @@ const Home = () => {
       <section id="projects" className="py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={projectsRef}>
-          <h2 className="text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Projects</h2>
-          <p className="text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Projects</h2>
+          <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
             A showcase of my recent work and contributions
           </p>
 
-          <div className="grid md:grid-cols-2 gap-8">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
             {projects.slice(0, 4).map((project, index) => (
               <div key={project.id} className="project-card glass rounded-xl overflow-hidden">
                 <div className="gradient-sweep"></div>
@@ -258,8 +273,8 @@ const Home = () => {
       <section id="research" className="py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={researchRef}>
-          <h2 className="text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Research & Case Studies</h2>
-          <p className="text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Research & Case Studies</h2>
+          <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
             Structured thinking, analysis, and problem-solving through research-style and case-study content
           </p>
 
@@ -287,8 +302,8 @@ const Home = () => {
       <section id="experience" className="py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={experienceRef}>
-          <h2 className="text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Experience</h2>
-          <p className="text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Experience</h2>
+          <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
             My professional journey and career highlights
           </p>
 
@@ -298,7 +313,7 @@ const Home = () => {
                 <CardWithGlare className="group">
                   <div className="flex flex-col mb-4">
                     <div className="stagger-item">
-                      <h3 className="text-2xl font-semibold" style={{ color: themeClasses.primaryText }}>{exp.title}</h3>
+                      <h3 className="text-lg sm:text-xl font-semibold" style={{ color: themeClasses.primaryText }}>{exp.title}</h3>
                       <div className="w-0 h-0.5 group-hover:w-full transition-all duration-300 ease-out mb-2" style={{ backgroundColor: themeClasses.accent }}></div>
                       <p style={{ color: themeClasses.accent, fontWeight: 'medium' }}>{exp.company}</p>
                     </div>
@@ -310,7 +325,7 @@ const Home = () => {
                       href="https://www.facebook.com/cameow.bd/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block px-4 py-2 rounded-lg font-medium transition-all duration-400 mb-4"
+                      className="inline-flex items-center min-h-[44px] px-4 py-2 rounded-lg font-medium transition-all duration-400 mb-4"
                       style={{ backgroundColor: themeClasses.accent, color: themeClasses.cardBackground }}
                     >
                       Visit Cameow
@@ -346,14 +361,14 @@ const Home = () => {
       {/* Contact Section */}
       <section id="contact" className="py-20" style={{ backgroundColor: themeClasses.sectionBackground }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-12 text-center animate-fade-in" style={{ color: themeClasses.primaryText }}>Contact</h2>
-          <p className="text-lg text-center mb-16 animate-fade-in" style={{ color: themeClasses.secondaryText }}>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center animate-fade-in" style={{ color: themeClasses.primaryText }}>Contact</h2>
+          <p className="text-sm sm:text-base lg:text-lg text-center mb-16 animate-fade-in" style={{ color: themeClasses.secondaryText }}>
             Let's work together and build something amazing
           </p>
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="animate-fade-in">
-              <h3 className="text-2xl font-semibold mb-6" style={{ color: themeClasses.primaryText }}>Get In Touch</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-6" style={{ color: themeClasses.primaryText }}>Get In Touch</h3>
               <div className="space-y-6">
                 <div className="flex items-center">
                   <div className="w-12 h-12 rounded-lg flex items-center justify-center mr-4" style={{ backgroundColor: themeClasses.accent }}>
@@ -363,7 +378,7 @@ const Home = () => {
                     <a
                       href="mailto:inkiadbinershad@gmail.com"
                       style={{ color: themeClasses.accent, textDecoration: 'none' }}
-                      className="transition-colors duration-200"
+                      className="inline-flex items-center min-h-[44px] transition-colors duration-200"
                       onMouseEnter={(e) => e.target.style.color = themeClasses.primaryText}
                       onMouseLeave={(e) => e.target.style.color = themeClasses.accent}
                     >
@@ -379,7 +394,7 @@ const Home = () => {
                     <a
                       href="tel:01979190001"
                       style={{ color: themeClasses.accent, textDecoration: 'none' }}
-                      className="transition-colors duration-200"
+                      className="inline-flex items-center min-h-[44px] transition-colors duration-200"
                       onMouseEnter={(e) => e.target.style.color = themeClasses.primaryText}
                       onMouseLeave={(e) => e.target.style.color = themeClasses.accent}
                     >
@@ -397,7 +412,7 @@ const Home = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ color: themeClasses.accent, textDecoration: 'none' }}
-                      className="transition-colors duration-200"
+                      className="inline-flex items-center min-h-[44px] transition-colors duration-200"
                       onMouseEnter={(e) => e.target.style.color = themeClasses.primaryText}
                       onMouseLeave={(e) => e.target.style.color = themeClasses.accent}
                     >
@@ -415,7 +430,7 @@ const Home = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ color: themeClasses.accent, textDecoration: 'none' }}
-                      className="transition-colors duration-200"
+                      className="inline-flex items-center min-h-[44px] transition-colors duration-200"
                       onMouseEnter={(e) => e.target.style.color = themeClasses.primaryText}
                       onMouseLeave={(e) => e.target.style.color = themeClasses.accent}
                     >

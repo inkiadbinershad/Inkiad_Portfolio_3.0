@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -10,11 +10,18 @@ import Experience from './pages/Experience';
 import Research from './pages/Research';
 import Contact from './pages/Contact';
 import ClickSpark from './components/ClickSpark';
+import CursorTrail from './components/CursorTrail';
+import PageLoader from './components/PageLoader';
+import PageTransition from './components/PageTransition';
+import usePageLoader from './hooks/usePageLoader';
 
 export const ThemeContext = createContext();
 
 function App() {
   const [theme, setTheme] = useState('dark');
+  const { isLoading } = usePageLoader();
+  const location = useLocation();
+  const [routeLoading, setRouteLoading] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -25,6 +32,14 @@ function App() {
     localStorage.setItem('theme', theme);
     document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
+
+  useEffect(() => {
+    setRouteLoading(true);
+    const timer = setTimeout(() => {
+      setRouteLoading(false);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
@@ -40,21 +55,27 @@ function App() {
     border: theme === 'dark' ? '#1E293B' : '#E2E8F0'
   };
 
-  return (
+return (
     <ThemeContext.Provider value={{ theme, toggleTheme, themeClasses }}>
+      <CursorTrail />
+      <PageLoader isLoading={isLoading || routeLoading} />
       <ClickSpark>
-        <div className="min-h-screen" style={{ backgroundColor: themeClasses.background }}>
+        <div className="min-h-screen flex flex-col overflow-x-hidden" style={{ backgroundColor: themeClasses.background }}>
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/experience" element={<Experience />} />
-            <Route path="/research" element={<Research />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <main className="flex-1">
+            <PageTransition>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/skills" element={<Skills />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/experience" element={<Experience />} />
+                <Route path="/research" element={<Research />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </PageTransition>
+          </main>
           <Footer />
         </div>
       </ClickSpark>
