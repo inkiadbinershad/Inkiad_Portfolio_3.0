@@ -14,6 +14,7 @@ import CursorTrail from './components/CursorTrail';
 import PageLoader from './components/PageLoader';
 import PageTransition from './components/PageTransition';
 import usePageLoader from './hooks/usePageLoader';
+import './hooks/useGSAP';
 
 export const ThemeContext = createContext();
 
@@ -60,22 +61,20 @@ return (
       <CursorTrail />
       <PageLoader isLoading={isLoading || routeLoading} />
       <ClickSpark>
-        <div className="min-h-screen flex flex-col overflow-x-hidden" style={{ backgroundColor: themeClasses.background }}>
+        <div className="overflow-x-hidden min-h-screen flex flex-col" style={{ backgroundColor: themeClasses.background }}>
           <Navbar />
-          <main className="flex-1">
-            <PageTransition>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/skills" element={<Skills />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route path="/experience" element={<Experience />} />
-                <Route path="/research" element={<Research />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
-            </PageTransition>
-          </main>
+          <div className="flex-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/skills" element={<Skills />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/experience" element={<Experience />} />
+              <Route path="/research" element={<Research />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </div>
           <Footer />
         </div>
       </ClickSpark>

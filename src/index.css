@@ -6,6 +6,11 @@ html,
 body,
 #root {
   background-color: #0f172a;
+  min-height: 100%;
+}
+
+#root > div {
+  min-height: 100vh;
 }
 
 .card-glow {
@@ -482,6 +487,8 @@ html {
 
 /* ==================== GLASS EFFECT ==================== */
 .glass {
+  position: relative;
+  overflow: hidden;
   background: rgba(15, 23, 42, 0.3);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(56, 189, 248, 0.2);

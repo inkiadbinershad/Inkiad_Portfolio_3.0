@@ -1,40 +1,45 @@
 import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
 
 const CursorTrail = () => {
   const dotsRef = useRef([]);
   const mousePos = useRef({ x: 0, y: 0 });
-  const DOT_COUNT = 8;
+  const DOT_COUNT = 1;
 
   useEffect(() => {
     // Skip on touch devices
     if (window.matchMedia('(pointer: coarse)').matches) return;
 
     const dots = dotsRef.current;
+    const positions = Array.from({ length: DOT_COUNT }, () => ({ x: 0, y: 0 }));
+    const ease = 0.18;
 
     const onMouseMove = (e) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
+      mousePos.current.x = e.clientX;
+      mousePos.current.y = e.clientY;
     };
 
     window.addEventListener('mousemove', onMouseMove);
 
-    // Each dot follows the previous with delay
-    const quickSetters = dots.map((dot) => ({
-      x: gsap.quickTo(dot, 'x', { duration: 0.3, ease: 'power3' }),
-      y: gsap.quickTo(dot, 'y', { duration: 0.3, ease: 'power3' })
-    }));
-
     let frame;
     const animate = () => {
-      quickSetters.forEach((qs, i) => {
-        const delay = i * 0.025;
-        gsap.delayedCall(delay, () => {
-          qs.x(mousePos.current.x);
-          qs.y(mousePos.current.y);
-        });
+      let targetX = mousePos.current.x;
+      let targetY = mousePos.current.y;
+
+      dots.forEach((dot, index) => {
+        if (!dot) return;
+
+        const pos = positions[index];
+        pos.x += (targetX - pos.x) * ease;
+        pos.y += (targetY - pos.y) * ease;
+        dot.style.transform = `translate(${pos.x}px, ${pos.y}px) translate(-50%, -50%)`;
+
+        targetX = pos.x;
+        targetY = pos.y;
       });
+
       frame = requestAnimationFrame(animate);
     };
+
     frame = requestAnimationFrame(animate);
 
     return () => {

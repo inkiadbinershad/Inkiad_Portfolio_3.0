@@ -32,7 +32,7 @@ const PageTransition = ({ children }) => {
   }, [location.pathname]);
 
   return (
-    <div ref={contentRef} style={{ opacity: 1 }}>
+    <div ref={contentRef} style={{ opacity: 1, display: 'flex', flex: 1, flexDirection: 'column' }}>
       {/* Overlay */}
       <div
         ref={overlayRef}

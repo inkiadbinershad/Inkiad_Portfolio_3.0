@@ -91,7 +91,7 @@ const handleChange = (e) => {
   ];
 
   return (
-    <div>
+    <div style={{ backgroundColor: themeClasses.background, minHeight: '100vh' }}>
       {/* Hero Section */}
       <section id="hero" className="min-h-screen flex items-center aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />

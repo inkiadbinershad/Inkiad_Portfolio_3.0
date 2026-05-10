@@ -55,7 +55,7 @@ const Experience = () => {
   ];
 
   return (
-    <div style={{ backgroundColor: themeClasses.background }}>
+    <div style={{ backgroundColor: themeClasses.background, minHeight: '100vh' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div ref={headingRef}>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Experience</h1>
