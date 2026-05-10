@@ -12,7 +12,6 @@ import Contact from './pages/Contact';
 import ClickSpark from './components/ClickSpark';
 import CursorTrail from './components/CursorTrail';
 import PageLoader from './components/PageLoader';
-import PageTransition from './components/PageTransition';
 import usePageLoader from './hooks/usePageLoader';
 import './hooks/useGSAP';
 
