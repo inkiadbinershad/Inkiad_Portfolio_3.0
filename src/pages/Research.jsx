@@ -6,17 +6,20 @@ import useInView from '../hooks/useInView';
 
 const Research = () => {
   const { themeClasses } = useContext(ThemeContext);
+  const headingRef = useInView();
   const contentRef = useInView();
 
   return (
-    <div style={{ backgroundColor: themeClasses.background, minHeight: '100vh' }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20" ref={contentRef}>
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Research & Case Studies</h1>
-        <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
-          Structured thinking, analysis, and problem-solving through research-style and case-study content
-        </p>
+    <div className="page-layer min-h-screen flex flex-col overflow-x-hidden" style={{ backgroundColor: themeClasses.background }}>
+      <div className="page-content flex-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-[84px] pb-8">
+        <div ref={headingRef}>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Research & Case Studies</h1>
+          <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
+            Structured thinking, analysis, and problem-solving through research-style and case-study content
+          </p>
+        </div>
 
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+        <div ref={contentRef} className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
           {research.map((item, index) => (
             <div key={item.id} className="glass rounded-xl overflow-hidden relative">
               <div className="gradient-sweep"></div>

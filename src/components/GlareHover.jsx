@@ -28,16 +28,14 @@ const GlareHover = ({
 
   return (
     <div
-      className="relative overflow-hidden"
+      className="glare-hover"
       onMouseEnter={animateIn}
       onMouseLeave={animateOut}
     >
       <div
         ref={overlayRef}
+        className="glare-overlay"
         style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 10,
           willChange: 'background-position',
           background: `linear-gradient(${glareAngle}deg,
             transparent 60%,
@@ -50,7 +48,9 @@ const GlareHover = ({
           opacity: glareOpacity
         }}
       />
-      {children}
+      <div className="glare-content">
+        {children}
+      </div>
     </div>
   );
 };

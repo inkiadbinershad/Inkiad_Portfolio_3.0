@@ -17,7 +17,7 @@ const About = () => {
     const img = imgRef.current;
     if (!img) return;
 
-    gsap.to(img, {
+    const tween = gsap.to(img, {
       y: -40,
       ease: 'none',
       scrollTrigger: {
@@ -28,13 +28,17 @@ const About = () => {
       }
     });
 
-    return () => ScrollTrigger.getAll().forEach(st => st.kill());
+    return () => {
+      if (tween?.scrollTrigger) {
+        tween.scrollTrigger.kill();
+      }
+    };
   }, []);
 
 
-  return (
-    <div style={{ backgroundColor: themeClasses.background, minHeight: '100vh' }}>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+return (
+    <div className="page-layer min-h-screen flex flex-col overflow-x-hidden" style={{ backgroundColor: themeClasses.background }}>
+      <div className="page-content flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-[84px] pb-20"> 
         <div ref={headingRef}>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>About Me</h1>
         </div>

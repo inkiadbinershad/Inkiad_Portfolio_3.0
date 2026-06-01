@@ -4,6 +4,7 @@ import useInView from '../hooks/useInView';
 
 const Contact = () => {
   const { themeClasses } = useContext(ThemeContext);
+  const headingRef = useInView();
   const formRef = useInView();
   const contactRef = useInView();
 
@@ -57,12 +58,14 @@ const Contact = () => {
   ];
 
   return (
-    <div style={{ backgroundColor: themeClasses.background, minHeight: '100vh' }}>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Contact</h1>
-        <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
-          Let's work together and build something amazing
-        </p>
+    <div className="page-layer min-h-screen flex flex-col overflow-x-hidden" style={{ backgroundColor: themeClasses.background }}>
+      <div className="page-content flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-[84px] pb-8">
+        <div ref={headingRef}>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Contact</h1>
+          <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
+            Let's work together and build something amazing
+          </p>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-12">
           <div ref={contactRef} className="blur-reveal">

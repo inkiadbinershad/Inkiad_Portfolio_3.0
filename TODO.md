@@ -1,10 +1,6 @@
-# Fix TODO
+- [x] Reformat page components (Skills/Projects/Experience/Research/Contact) that were damaged during earlier edits.
+- [ ] Fix long empty-scroll space by removing `min-h-screen`-driven height inflation or switching layout to natural content height.
+- [ ] Ensure consistent navbar offset spacing without creating extra page height.
+- [ ] Run `npm run lint` and `npm run build` to verify deployment correctness.
 
-- [x] FIX 1: src/index.css — add html/body/#root background-color block
-- [x] FIX 2: src/pages/Research.jsx — remove "project-card" from outer wrapper
-- [x] FIX 3: src/pages/Experience.jsx — add headingRef + wrap h1/p
-- [x] FIX 4: src/hooks/useInView.js — rootMargin -30px → -20px
-- [ ] Run npm run build (must be zero errors)
-- [ ] Run npm run preview
-- [ ] Manual verification of all routes
 

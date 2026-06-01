@@ -91,11 +91,11 @@ const handleChange = (e) => {
   ];
 
   return (
-    <div style={{ backgroundColor: themeClasses.background, minHeight: '100vh' }}>
+    <div className="page-layer min-h-screen flex flex-col overflow-x-hidden" style={{ backgroundColor: themeClasses.background }}>
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
+      <section id="hero" className="section-layer flex-1 flex items-center aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+        <div className="section-inner max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
           <div className="text-left">
 <h1 ref={heroTitleRef} className="text-5xl md:text-6xl font-bold mb-4 glow-pulse" style={{ color: themeClasses.primaryText }}>
               {"INKIAD BIN ERSHAD RAFEY".split("").map((char, i) => (
@@ -142,9 +142,9 @@ const handleChange = (e) => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
+      <section id="about" className="section-layer py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={aboutRef}>
+        <div className="section-inner max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={aboutRef}>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>About Me</h2>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
@@ -166,9 +166,9 @@ const handleChange = (e) => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
+      <section id="skills" className="section-layer py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={skillsRef}>
+        <div className="section-inner max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={skillsRef}>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Skills</h2>
           <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
             Technologies and tools I work with
@@ -239,9 +239,9 @@ const handleChange = (e) => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
+      <section id="projects" className="section-layer py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={projectsRef}>
+        <div className="section-inner max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={projectsRef}>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Projects</h2>
           <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
             A showcase of my recent work and contributions
@@ -270,9 +270,9 @@ const handleChange = (e) => {
       </section>
 
       {/* Research & Case Studies Section */}
-      <section id="research" className="py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
+      <section id="research" className="section-layer py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={researchRef}>
+        <div className="section-inner max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={researchRef}>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Research & Case Studies</h2>
           <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
             Structured thinking, analysis, and problem-solving through research-style and case-study content
@@ -299,9 +299,9 @@ const handleChange = (e) => {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
+      <section id="experience" className="section-layer py-20 aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={experienceRef}>
+        <div className="section-inner max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={experienceRef}>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Experience</h2>
           <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
             My professional journey and career highlights

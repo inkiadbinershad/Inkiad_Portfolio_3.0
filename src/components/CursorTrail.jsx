@@ -71,7 +71,7 @@ const CursorTrail = () => {
             pointerEvents: 'none',
             zIndex: 99997,
             transform: 'translate(-50%, -50%)',
-            mixBlendMode: 'screen'
+            boxShadow: '0 0 10px rgba(56, 189, 248, 0.5)'
           }}
         />
       ))}

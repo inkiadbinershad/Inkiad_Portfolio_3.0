@@ -1,7 +1,5 @@
 import { useState, useEffect, createContext } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Skills from './pages/Skills';
@@ -9,6 +7,8 @@ import Projects from './pages/Projects';
 import Experience from './pages/Experience';
 import Research from './pages/Research';
 import Contact from './pages/Contact';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import ClickSpark from './components/ClickSpark';
 import CursorTrail from './components/CursorTrail';
 import PageLoader from './components/PageLoader';
@@ -55,27 +55,23 @@ function App() {
     border: theme === 'dark' ? '#1E293B' : '#E2E8F0'
   };
 
-return (
+  return (
     <ThemeContext.Provider value={{ theme, toggleTheme, themeClasses }}>
-      <CursorTrail />
-      <PageLoader isLoading={isLoading || routeLoading} />
       <ClickSpark>
-        <div className="overflow-x-hidden min-h-screen flex flex-col" style={{ backgroundColor: themeClasses.background }}>
-          <Navbar />
-          <div className="flex-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/skills" element={<Skills />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/experience" element={<Experience />} />
-              <Route path="/research" element={<Research />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </div>
-          <Footer />
-        </div>
+        <CursorTrail />
+        <PageLoader isLoading={isLoading || routeLoading} />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/experience" element={<Experience />} />
+          <Route path="/research" element={<Research />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        <Footer />
       </ClickSpark>
     </ThemeContext.Provider>
   );

@@ -18,7 +18,7 @@ const Experience = () => {
     const line = timelineLineRef.current;
     if (!line) return;
 
-    gsap.fromTo(line,
+    const tween = gsap.fromTo(line,
       { scaleY: 0 },
       {
         scaleY: 1,
@@ -32,7 +32,11 @@ const Experience = () => {
       }
     );
 
-    return () => ScrollTrigger.getAll().forEach(st => st.kill());
+    return () => {
+      if (tween?.scrollTrigger) {
+        tween.scrollTrigger.kill();
+      }
+    };
   }, []);
 
   const experiences = [
@@ -55,8 +59,8 @@ const Experience = () => {
   ];
 
   return (
-    <div style={{ backgroundColor: themeClasses.background, minHeight: '100vh' }}>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div className="page-layer min-h-screen flex flex-col overflow-x-hidden" style={{ backgroundColor: themeClasses.background }}>
+      <div className="page-content flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-[84px] pb-8">
         <div ref={headingRef}>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Experience</h1>
           <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>
