@@ -4,6 +4,7 @@ import useInView from '../hooks/useInView';
 import profileImg from '../assets/profile.png';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import styles from './About.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,8 +38,8 @@ const About = () => {
 
 
 return (
-    <div className="page-layer min-h-screen flex flex-col overflow-x-hidden" style={{ backgroundColor: themeClasses.background }}>
-      <div className="page-content flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-[84px] pb-20"> 
+    <div className={`${styles.pageWrapper} min-h-screen flex flex-col overflow-x-hidden`} style={{ backgroundColor: themeClasses.background }}>
+      <div className={`${styles.pageContent} flex-1`}>
         <div ref={headingRef}>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>About Me</h1>
         </div>

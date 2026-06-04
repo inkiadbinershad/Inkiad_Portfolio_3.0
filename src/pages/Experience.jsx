@@ -4,6 +4,7 @@ import { ThemeContext } from '../App';
 import useInView from '../hooks/useInView';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import styles from './Experience.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,8 +60,8 @@ const Experience = () => {
   ];
 
   return (
-    <div className="page-layer min-h-screen flex flex-col overflow-x-hidden" style={{ backgroundColor: themeClasses.background }}>
-      <div className="page-content flex-1 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-[84px] pb-8">
+    <div className={`${styles.pageWrapper} min-h-screen flex flex-col overflow-x-hidden`} style={{ backgroundColor: themeClasses.background }}>
+      <div className={`${styles.pageContent} flex-1`}>
         <div ref={headingRef}>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-12 text-center blur-reveal" style={{ color: themeClasses.primaryText }}>Experience</h1>
           <p className="text-sm sm:text-base lg:text-lg text-center mb-16 blur-reveal" style={{ color: themeClasses.secondaryText, animationDelay: '0.1s' }}>

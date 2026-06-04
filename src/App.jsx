@@ -37,7 +37,7 @@ function App() {
     setRouteLoading(true);
     const timer = setTimeout(() => {
       setRouteLoading(false);
-    }, 800);
+    }, 300);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 

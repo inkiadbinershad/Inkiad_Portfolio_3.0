@@ -56,14 +56,6 @@ html {
   overflow: hidden;
 }
 
-.page-layer {
-  position: relative;
-}
-
-.page-content {
-  position: relative;
-}
-
 .section-layer {
   position: relative;
   overflow: hidden;
@@ -260,8 +252,11 @@ html {
 }
 
 /* Descendant animations when parent has in-view */
-.in-view .blur-reveal {
-  animation: blur-reveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+body .in-view .blur-reveal {
+  animation-name: blur-reveal;
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation-fill-mode: forwards;
 }
 
 .in-view .project-card {
