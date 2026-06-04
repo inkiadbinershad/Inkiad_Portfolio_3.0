@@ -13,6 +13,7 @@ const Experience = () => {
   const headingRef = useInView();
   const card1Ref = useInView();
   const card2Ref = useInView();
+  const card3Ref = useInView();
   const timelineLineRef = useRef(null);
 
   useEffect(() => {
@@ -50,6 +51,14 @@ const Experience = () => {
       technologies: ['React', 'Tailwind CSS', 'JavaScript']
     },
     {
+      title: 'Web Development Intern',
+      company: 'Apexiums Technologies',
+      location: 'Dhaka, Bangladesh',
+      period: 'March 2025 – May 2025',
+      description: 'Completed a 2-month web development internship. Built and delivered one major client-facing project independently. Gained professional experience in real-world frontend development workflows.',
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'React']
+    },
+    {
       title: 'Founder',
       company: 'Cameow',
       location: 'Dhaka, Bangladesh',
@@ -69,24 +78,11 @@ const Experience = () => {
           </p>
         </div>
 
-        <div className="relative">
-          {/* Timeline Line */}
-          <div 
-            ref={timelineLineRef}
-            className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full timeline-line" 
-            style={{ 
-              background: `linear-gradient(180deg, ${themeClasses.accent}, transparent)`, 
-              top: 0,
-              scaleY: 0,
-              transformOrigin: 'top center'
-            }}
-          ></div>
-
-          <div className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {experiences.map((exp, index) => {
-              const refs = [card1Ref, card2Ref];
+              const refs = [card1Ref, card2Ref, card3Ref];
               return (
-                <div key={index} ref={refs[index]} className={`${index % 2 === 0 ? 'timeline-card-left' : 'timeline-card-right'} md:w-1/2 ${index % 2 === 1 ? 'md:ml-auto' : ''}`}>
+                <div key={index} ref={refs[index]} className="blur-reveal">
                   <CardWithGlare className="group">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                       <div className="stagger-item">
