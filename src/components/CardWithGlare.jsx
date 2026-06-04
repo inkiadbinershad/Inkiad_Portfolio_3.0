@@ -11,7 +11,6 @@ const CardWithGlare = ({ children, className = '', style = {} }) => {
         className={`rounded-xl p-4 sm:p-6 lg:p-8 transition-all duration-300 ease-out border card-glow relative overflow-hidden ${className}`}
         style={{
           position: 'relative',
-          zIndex: 2,
           backgroundColor: themeClasses.cardBackground,
           borderColor: themeClasses.border,
           border: `1px solid ${themeClasses.border}`,
