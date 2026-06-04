@@ -91,7 +91,7 @@ const handleChange = (e) => {
   ];
 
   return (
-    <div className="page-layer min-h-screen flex flex-col overflow-x-hidden" style={{ backgroundColor: themeClasses.background }}>
+    <div className="page-layer min-h-screen flex flex-col overflow-x-hidden" style={{ backgroundColor: themeClasses.background, isolation: 'isolate' }}>
       {/* Hero Section */}
       <section id="hero" className="section-layer flex-1 flex items-center aurora-background relative overflow-hidden" style={{ backgroundColor: themeClasses.background }}>
         <ParticleBackground />
