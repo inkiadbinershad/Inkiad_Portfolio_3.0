@@ -12,7 +12,8 @@ export const skills = {
     "Task delegation",
     "Problem-solving",
     "Time management",
-    "Communication"
+    "Communication",
+    "Project Management"
   ],
   creative: [
     "Content writing",
